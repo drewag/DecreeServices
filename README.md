@@ -14,7 +14,7 @@ Service declarations for [Decree](https://github.com/drewag/Decree), a framework
 Services
 --------------
 
-- [Amazon AWS S3](https://github.com/drewag/Decree/wiki/Amazon-AWS-S3)
-- [Google Analytics](https://github.com/drewag/Decree/wiki/Google-Analytics)
-- [FreshDesk](https://github.com/drewag/Decree/wiki/FreshDesk)
+- [Amazon AWS S3](https://github.com/drewag/DecreeServices/wiki/Amazon-AWS-S3)
+- [Google Analytics](https://github.com/drewag/DecreeServices/wiki/Google-Analytics)
+- [FreshDesk](https://github.com/drewag/DecreeServices/wiki/FreshDesk)
 - Apple App Store Receipt Validation
