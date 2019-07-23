@@ -17,4 +17,4 @@ Services
 - [Amazon AWS S3](https://github.com/drewag/DecreeServices/wiki/Amazon-AWS-S3)
 - [Google Analytics](https://github.com/drewag/DecreeServices/wiki/Google-Analytics)
 - [FreshDesk](https://github.com/drewag/DecreeServices/wiki/FreshDesk)
-- Apple App Store Receipt Validation
+- [Apple App Store](https://github.com/drewag/DecreeServices/wiki/Apple-App-Store)
