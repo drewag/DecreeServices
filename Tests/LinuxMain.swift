@@ -1,8 +1,8 @@
 import XCTest
 
-import DecreeTests
+import DecreeServicesTests
 
 var tests = [XCTestCaseEntry]()
-tests += DecreeTests.__allTests()
+tests += DecreeServicesTests.__allTests()
 
 XCTMain(tests)
