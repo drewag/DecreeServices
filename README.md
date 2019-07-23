@@ -14,6 +14,8 @@ Service declarations for [Decree](https://github.com/drewag/Decree), a framework
 Services
 --------------
 
+If you would like a service that isn't here or would like additional endpoint definitions for an existing service, please open an issue.
+
 - [Amazon AWS S3](https://github.com/drewag/DecreeServices/wiki/Amazon-AWS-S3)
 - [Google Analytics](https://github.com/drewag/DecreeServices/wiki/Google-Analytics)
 - [FreshDesk](https://github.com/drewag/DecreeServices/wiki/FreshDesk)
