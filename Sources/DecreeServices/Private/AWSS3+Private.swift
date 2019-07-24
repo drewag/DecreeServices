@@ -41,7 +41,7 @@ extension AWS.S3 {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
         dateFormatter.dateFormat = "yyyyMMdd"
-        let date = Date.now
+        let date = TestableDate.now
         let timestampString = timestampFormatter.string(from: date)
         let dateString = dateFormatter.string(from: date)
         return (timestampString, dateString)

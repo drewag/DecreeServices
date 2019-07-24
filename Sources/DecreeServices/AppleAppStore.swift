@@ -96,7 +96,7 @@ extension Apple.AppStore {
                 self.quantity = quantity
                 self.productId = productId
                 self.transactionId = transactionId
-                self.purchaseDate = purchaseDate ?? Date.now
+                self.purchaseDate = purchaseDate ?? TestableDate.now
                 self.originalPurchaseDate = originalPurchaseDate
             }
         }
