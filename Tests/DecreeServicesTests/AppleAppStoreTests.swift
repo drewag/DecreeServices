@@ -62,33 +62,59 @@ class AppleAppStoreTests: XCTestCase {
 
     func testOutputErrors() throws {
         self.session.fixedOutput = (data: Status.unreadable.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "The App Store could not read the JSON object you provided.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "The App Store could not read the JSON object you provided.")
+        })
 
         self.session.fixedOutput = (data: Status.malformed.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "The data in the receipt-data property was malformed or missing.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "The data in the receipt-data property was malformed or missing.")
+        })
 
         self.session.fixedOutput = (data: Status.notAuthenticated.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "The receipt could not be authenticated.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "The receipt could not be authenticated.")
+        })
 
         self.session.fixedOutput = (data: Status.invalidSharedSecret.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "The shared secret you provided does not match the shared secret on file for your account.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "The shared secret you provided does not match the shared secret on file for your account.")
+        })
 
         self.session.fixedOutput = (data: Status.serverUnavailable.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "The receipt server is not currently available.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "The receipt server is not currently available.")
+        })
 
         self.session.fixedOutput = (data: Status.subscriptionExpired.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "This receipt is valid but the subscription has expired.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "This receipt is valid but the subscription has expired.")
+        })
 
         self.session.fixedOutput = (data: Status.receiptIsProduction.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "This receipt is from the production environment, but it was sent to the test environment for verification. Send it to the production environment instead.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "This receipt is from the production environment, but it was sent to the test environment for verification. Send it to the production environment instead.")
+        })
 
         self.session.fixedOutput = (data: Status.unauthrozized.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "This receipt could not be authorized. Treat this the same as if a purchase was never made.")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Error communicating with Apple's servers\"")
+            XCTAssertEqual(($0 as! DecreeError).details, "This receipt could not be authorized. Treat this the same as if a purchase was never made.")
+        })
 
         // Output Parsing
 
         self.session.fixedOutput = (data: Status.success.responseData, response: TestResponse(), error: nil)
-        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", { XCTAssertEqual($0.localizedDescription, "Error decoding Output")})
+        XCTAssertThrowsError(try Verify().makeSynchronousRequest(with: receiptData), "", {
+            XCTAssertEqual($0.localizedDescription, "Error making request: An internal error has occured. If it continues, please contact support with the description \"Failed to decode Output.\"")
+        })
     }
 
     func testCoding() throws {

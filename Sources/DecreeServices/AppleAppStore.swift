@@ -27,18 +27,18 @@ public struct Apple {
             case .receiptIsTest:
                 throw ReceiptIsTestError()
             default:
-                throw ResponseError.custom(response.status.description)
+                throw E.error(reason: "Error communicating with Apple's servers" , details: response.status.description, isInternal: true)
             }
         }
 
-        public func handle<E: Endpoint>(_ error: ErrorKind, response: URLResponse, from endpoint: E) -> ErrorHandling {
+        public func handle<E: Endpoint>(_ error: DecreeError, response: URLResponse, from endpoint: E) -> ErrorHandling {
             let sandboxURL = URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")!
 
-            switch error {
-            case .plain(let plain) where plain is ReceiptIsTestError:
+            switch error.code {
+            case .other(let other) where other is ReceiptIsTestError:
                 return .redirect(to: sandboxURL)
             default:
-                return .none
+                return .error(error)
             }
         }
     }

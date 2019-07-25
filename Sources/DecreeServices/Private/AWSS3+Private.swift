@@ -22,12 +22,15 @@ extension AWSS3Endpoint {
 
         let rawURL = service.baseURL.appendingPathComponent(self.path)
         guard var components = URLComponents(url: rawURL, resolvingAgainstBaseURL: false) else {
-            throw RequestError.custom("invalid url generated")
+            throw type(of: self).error(reason: "Invalid URL generated", details: "The url was '\(rawURL)'", isInternal: true)
         }
 
         components.queryItems = params.map({ URLQueryItem(name: $0, value: $1) })
         guard let url = components.url else {
-            throw RequestError.custom("signing url because the result was not valid")
+            let queryItems = params.map({ key, value in
+                return "\"\(key)\":\"\(value ?? "")\""
+            }).joined(separator: ",")
+            throw type(of: self).error(reason: "Problem applying URL query to URL", details: "Query items were: [\(queryItems)]", isInternal: true)
         }
         return url
     }
