@@ -14,6 +14,6 @@ Pod::Spec.new do |spec|
 
   spec.source_files       = 'Sources/DecreeServices/**/*.swift'
 
-  spec.dependency 'Decree', '~> 2.1.0'
+  spec.dependency 'Decree', '~> 3.0.0'
   spec.dependency 'CryptoSwift', '~> 1.0.0'
 end
