@@ -21,3 +21,8 @@ If you would like a service that isn't here or would like additional endpoint de
 - [Google Analytics](https://github.com/drewag/DecreeServices/wiki/Google-Analytics)
 - [FreshDesk](https://github.com/drewag/DecreeServices/wiki/FreshDesk)
 - [Apple App Store](https://github.com/drewag/DecreeServices/wiki/Apple-App-Store)
+
+Desired Services
+-----------
+
+See what services we want to implement and/or are already in development [here](https://github.com/drewag/DecreeServices/labels/new%20service).
