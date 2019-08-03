@@ -24,7 +24,7 @@ class AppleAppStoreTests: XCTestCase {
     }
 
     func testVerifyInput() throws {
-        Verify().makeRequest(with: receiptData) { _ in }
+        Verify().makeRequest(with: receiptData, callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "https://buy.itunes.apple.com/verifyReceipt")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "POST")
@@ -34,7 +34,7 @@ class AppleAppStoreTests: XCTestCase {
     }
 
     func testRedirectToTest() {
-        Verify().makeRequest(with: receiptData) { _ in }
+        Verify().makeRequest(with: receiptData, callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "https://buy.itunes.apple.com/verifyReceipt")
         self.session.startedTasks.last!.complete(Status.receiptIsTest.responseData, TestResponse(), nil)

@@ -30,7 +30,7 @@ class GoogleAnalyticsTests: XCTestCase {
             customField2: "Field2",
             customField3: "Field3"
         )
-        Google.Analytics.Collect().makeRequest(with: record) { _ in }
+        Google.Analytics.Collect().makeRequest(with: record, callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "https://www.google-analytics.com/collect")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "POST")
@@ -44,7 +44,7 @@ class GoogleAnalyticsTests: XCTestCase {
             kind: .pageView(endpoint: "/test"),
             clientId: "CLIENT1"
         )
-        Google.Analytics.Collect().makeRequest(with: record) { _ in }
+        Google.Analytics.Collect().makeRequest(with: record, callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "https://www.google-analytics.com/collect")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "POST")

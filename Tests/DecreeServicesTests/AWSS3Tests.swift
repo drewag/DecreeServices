@@ -36,7 +36,7 @@ class AWSS3Tests: XCTestCase {
 
     func testGetObject() throws {
         TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
-        AWS.S3.GetObject(name: "test.txt").makeRequest() { _ in }
+        AWS.S3.GetObject(name: "test.txt").makeRequest(callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "GET")
@@ -54,7 +54,7 @@ class AWSS3Tests: XCTestCase {
     func testAddObject() {
         TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
         let body = "Example Body".data(using: .utf8)!
-        AWS.S3.AddObject(name: "test.txt").makeRequest(with: body) { _ in }
+        AWS.S3.AddObject(name: "test.txt").makeRequest(with: body, callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "PUT")
@@ -71,7 +71,7 @@ class AWSS3Tests: XCTestCase {
 
     func testDeleteObject() throws {
         TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
-        AWS.S3.DeleteObject(name: "test.txt").makeRequest() { _ in }
+        AWS.S3.DeleteObject(name: "test.txt").makeRequest(callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "DELETE")

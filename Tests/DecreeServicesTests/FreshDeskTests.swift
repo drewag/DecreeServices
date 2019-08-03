@@ -35,7 +35,7 @@ class FreshDeskTests: XCTestCase {
                 File(name: "file2.txt", text: "two"),
             ]
         )
-        FreshDesk.CreateTicket().makeRequest(with: ticket) { _ in }
+        FreshDesk.CreateTicket().makeRequest(with: ticket, callbackQueue: nil) { _ in }
 
         XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "https://domain.freshdesk.com/api/v2/tickets")
         XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "POST")
