@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct TestableDate {
+public struct TestableDate {
     private static var faked: (base: Date, started: Date)?
 
-    static func startFakingNow(from: Date) {
+    public static func startFakingNow(from: Date) {
         faked = (from, Date())
     }
 
-    static func stopFakingNow() {
+    public static func stopFakingNow() {
         faked = nil
     }
 
-    static func addFake(interval: TimeInterval) {
+    public static func addFake(interval: TimeInterval) {
         if faked == nil {
             self.startFakingNow(from: Date())
         }
