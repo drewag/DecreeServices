@@ -25,7 +25,6 @@ class TestURLSession: Session {
     var fixedOutput: (data: Data?, response: URLResponse?, error: Error?)?
 
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        print(request.url)
         return TestURLSessionDataTask(session: self, request: request, completionHandler: completionHandler)
     }
 }

@@ -15,7 +15,7 @@ let package = Package(
             targets: ["DecreeServices"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/drewag/Decree.git", from: "3.0.0"),
+        .package(url: "https://github.com/drewag/Decree.git", from: "4.0.0"),
         .package(url: "https://github.com/drewag/CryptoSwift.git", from: "1.0.0"),
     ],
     targets: [

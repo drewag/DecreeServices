@@ -50,16 +50,16 @@ extension Google.Analytics {
             case pageView(endpoint: String)
         }
 
-        let v = "1"
-        let tid: String
-        let cid: String
-        let ds = "api"
-        let t: String
-        let dp: String?
-        let uip: String?
-        let cd1: String?
-        let cd2: String?
-        let cd3: String?
+        public let v = "1"
+        public let tid: String
+        public let cid: String
+        public let ds = "api"
+        public let t: String
+        public let dp: String?
+        public let uip: String?
+        public let cd1: String?
+        public let cd2: String?
+        public let cd3: String?
 
         /// Define data to be recorded
         ///
