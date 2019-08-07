@@ -62,6 +62,10 @@ extension Apple.AppStore {
 
         public struct Output: Decodable {
             public let receipt: Receipt
+
+            public init(receipt: Receipt) {
+                self.receipt = receipt
+            }
         }
 
         public init() {}
@@ -102,6 +106,10 @@ extension Apple.AppStore {
         }
 
         public let inApp: [InApp]
+
+        public init(inApp: [InApp]) {
+            self.inApp = inApp
+        }
     }
 }
 

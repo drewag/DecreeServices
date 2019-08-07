@@ -92,15 +92,15 @@ extension FreshDesk {
             case urgent
         }
 
-        let type: Kind?
-        let source: Source
-        let status: Status
-        let priority: Priority
-        let name: String?
-        let email: String
-        let subject: String
-        let description: String
-        let attachments: [File]?
+        public let type: Kind?
+        public let source: Source
+        public let status: Status
+        public let priority: Priority
+        public let name: String?
+        public let email: String
+        public let subject: String
+        public let description: String
+        public let attachments: [File]?
 
         /// Initialize a new tickekt
         ///
