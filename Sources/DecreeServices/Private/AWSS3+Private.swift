@@ -15,6 +15,15 @@ extension AWSS3Endpoint {
     }
 
     public func presignURL(for service: Service) throws -> URL {
+        if let mock = service.sessionOverride as? WebServiceMock<Service> {
+            let next = try mock.nextExpectation(for: self)
+            guard let expectation = next as? PresignExpectation<Self> else {
+                throw DecreeError(.incorrectExpecation(expected: type(of: next).typeName, actual: "\(type(of: self))"), operationName: Self.operationName)
+            }
+            try expectation.validate(path: self.path, for: self)
+            return expectation.returning
+        }
+
         let (timestampString, dateString) = service.generateTimestamps()
 
         var params = try service.queryParams(queryBased: true, timestampString: timestampString, dateString: dateString)

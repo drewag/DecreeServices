@@ -85,4 +85,29 @@ class AWSS3Tests: XCTestCase {
         TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
         XCTAssertEqual(try AWS.S3.DeleteObject(name: "test.txt").presignURL().absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS/19690720/region/s3/aws4_request&X-Amz-Date=19690720T201700Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8bd1032bd7d7e1e3158b69837ad0e73441eada7a894685ca9318fdf7c3b4409f")
     }
+
+    func testMocking() {
+        let mock = AWS.S3.shared.startMocking()
+
+        mock.expectPresigning(AWS.S3.GetObject(name: "test.txt"), returning: URL(string: "http://example.com")!)
+        XCTAssertEqual(try AWS.S3.GetObject(name: "test.txt").presignURL().absoluteString, "http://example.com")
+
+        mock.expectPresigning(AWS.S3.GetObject(name: "other.txt"), returning: URL(string: "http://example.com")!)
+        XCTAssertThrowsError(try AWS.S3.GetObject(name: "test.txt").presignURL(), "", { error in
+            XCTAssertEqual((error as? DecreeError)?.debugDescription, """
+                Error making request: A request was made to the wrong path of ‘GetObject’.
+                Path was ‘/other.txt’ but expected ‘/other.txt‘.
+                """
+            )
+        })
+
+        mock.expectPresigning(AWS.S3.DeleteObject(name: "other.txt"), returning: URL(string: "http://example.com")!)
+        XCTAssertThrowsError(try AWS.S3.GetObject(name: "test.txt").presignURL(), "", { error in
+            XCTAssertEqual((error as? DecreeError)?.debugDescription, """
+                Error making request: A request was made to ‘GetObject’ when ‘DeleteObject’ was expected.
+                """
+            )
+        })
+
+    }
 }

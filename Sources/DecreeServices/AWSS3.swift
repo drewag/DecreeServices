@@ -30,8 +30,6 @@ public struct AWS {
 
         /// Get an object
         public struct GetObject: OutEndpoint, AWSS3Endpoint {
-            public typealias Service = AWS.S3
-
             public typealias Output = Data
             public static let outputFormat = OutputFormat.XML
 
@@ -45,8 +43,6 @@ public struct AWS {
 
         /// Add an object
         public struct AddObject: InEndpoint, AWSS3Endpoint {
-            public typealias Service = AWS.S3
-
             public static let method = Method.put
 
             public typealias Input = Data
@@ -62,8 +58,6 @@ public struct AWS {
 
         /// Delete an object
         public struct DeleteObject: EmptyEndpoint, AWSS3Endpoint {
-            public typealias Service = AWS.S3
-
             public static let method = Method.delete
 
             public static let outputFormat = OutputFormat.XML
