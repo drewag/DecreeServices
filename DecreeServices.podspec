@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = 'DecreeServices'
-  spec.version       = '4.0.0'
+  spec.version       = '4.1.0'
   spec.license       = { :type => 'MIT', :file => "LICENSE" }
   spec.homepage      = 'https://github.com/drewag/DecreeServices'
   spec.authors       = { 'Andrew J. Wagner' => 'https://drewag.me' }
@@ -14,6 +14,6 @@ Pod::Spec.new do |spec|
 
   spec.source_files       = 'Sources/DecreeServices/**/*.swift'
 
-  spec.dependency 'Decree', '~> 4.0.0'
+  spec.dependency 'Decree', '~> 4.1.1'
   spec.dependency 'CryptoSwift', '~> 1.0.0'
 end
