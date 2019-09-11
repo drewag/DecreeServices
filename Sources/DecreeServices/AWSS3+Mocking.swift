@@ -20,11 +20,28 @@ class PresignExpectation<E: AWSS3Endpoint>: AnyExpectation {
         return "\(E.self)"
     }
 
-    let path: String
+    let pathValidation: PathValidation
     let returning: URL
+    var waiting = DispatchSemaphore(value: 0)
 
-    init(path: String, returning: URL) {
-        self.path = path
+    init(pathValidation: @escaping PathValidation, returning: URL) {
+        self.pathValidation = pathValidation
         self.returning = returning
+    }
+
+    convenience init(path: String, returning: URL) {
+        self.init(
+            pathValidation: { actual in
+                guard actual == path else {
+                    throw DecreeError(.incorrectExpectationPath(
+                        expected: path,
+                        actual: actual,
+                        endpoint: String(describing: E.self)),
+                        operationName: E.operationName
+                    )
+                }
+            },
+            returning: returning
+        )
     }
 }

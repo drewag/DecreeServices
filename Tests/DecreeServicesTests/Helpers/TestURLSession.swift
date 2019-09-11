@@ -27,6 +27,10 @@ class TestURLSession: Session {
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         return TestURLSessionDataTask(session: self, request: request, completionHandler: completionHandler)
     }
+
+    func downloadTask(with request: URLRequest, completionHandler: @escaping (URL?, URLResponse?, Error?) -> Void) -> URLSessionDownloadTask {
+        fatalError("Download tasks not supported")
+    }
 }
 
 private class TestURLSessionDataTask: URLSessionDataTask {

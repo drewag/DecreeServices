@@ -96,7 +96,7 @@ class AWSS3Tests: XCTestCase {
         XCTAssertThrowsError(try AWS.S3.GetObject(name: "test.txt").presignURL(), "", { error in
             XCTAssertEqual((error as? DecreeError)?.debugDescription, """
                 Error making request: A request was made to the wrong path of ‘GetObject’.
-                Path was ‘/other.txt’ but expected ‘/other.txt‘.
+                Path was ‘/test.txt’ but expected ‘/other.txt‘.
                 """
             )
         })
