@@ -51,6 +51,22 @@ class AWSS3Tests: XCTestCase {
         XCTAssertEqual(try AWS.S3.GetObject(name: "test.txt").presignURL().absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS/19690720/region/s3/aws4_request&X-Amz-Date=19690720T201700Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1911606100195e5b017d24725e716e7f7888872ad0d2ef6df4bb04d6d36f6caa")
     }
 
+    func testGetObjectMetadata() throws {
+        TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
+        AWS.S3.GetObjectMetadata(name: "test.txt").makeRequest(callbackQueue: nil) { _ in }
+
+        XCTAssertEqual(self.session.startedTasks.last!.request.url?.absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt")
+        XCTAssertEqual(self.session.startedTasks.last!.request.httpMethod, "HEAD")
+        XCTAssertEqual(self.session.startedTasks.last!.request.httpBody, nil)
+        XCTAssertEqual(self.session.startedTasks.last!.request.allHTTPHeaderFields?[amzContentKey], "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+        XCTAssertEqual(self.session.startedTasks.last!.request.allHTTPHeaderFields?[amzDateKey], "19690720T201700Z")
+        XCTAssertEqual(self.session.startedTasks.last!.request.allHTTPHeaderFields?["Host"], "bucket.name.s3.amazonaws.com")
+        XCTAssertEqual(self.session.startedTasks.last!.request.allHTTPHeaderFields?["Authorization"], "AWS4-HMAC-SHA256 Credential=ACCESS/19690720/region/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=9dd69c90ae5a7949343337c331bbaf56b10e6534b780e1811a443c5b857c1996")
+
+        TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
+        XCTAssertEqual(try AWS.S3.DeleteObject(name: "test.txt").presignURL().absoluteString, "http://bucket.name.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS/19690720/region/s3/aws4_request&X-Amz-Date=19690720T201700Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8bd1032bd7d7e1e3158b69837ad0e73441eada7a894685ca9318fdf7c3b4409f")
+    }
+
     func testAddObject() {
         TestableDate.startFakingNow(from: Date(timeIntervalSince1970: -14182980))
         let body = "Example Body".data(using: .utf8)!

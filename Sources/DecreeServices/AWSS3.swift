@@ -41,6 +41,18 @@ public struct AWS {
             }
         }
 
+        /// Retrieve object's metadata
+        public struct GetObjectMetadata: EmptyEndpoint, AWSS3Endpoint {
+            public static let method = Method.head
+
+            public let path: String
+
+            /// - Parameter name: the name of the object to get the metadata of
+            public init(name: String) {
+                self.path = "/\(name)"
+            }
+        }
+
         /// Add an object
         public struct AddObject: InEndpoint, AWSS3Endpoint {
             public static let method = Method.put
