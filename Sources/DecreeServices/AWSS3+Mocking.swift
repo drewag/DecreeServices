@@ -7,6 +7,9 @@
 
 import Foundation
 import Decree
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 extension WebServiceMock where S == AWS.S3 {
     public func expectPresigning<E: AWSS3Endpoint>(_ endpoint: E, returning: URL) {

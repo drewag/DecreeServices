@@ -7,6 +7,9 @@
 
 import Foundation
 import Decree
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 /// Fresh Desk API V2
 ///

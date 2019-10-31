@@ -8,6 +8,9 @@
 import Foundation
 import Decree
 import CryptoSwift
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 extension AWSS3Endpoint {
     public func presignURL() throws -> URL {

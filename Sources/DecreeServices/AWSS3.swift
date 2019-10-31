@@ -8,6 +8,9 @@
 
 import Foundation
 import Decree
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 /// Protocol for AWS S3 Endpoints
 public protocol AWSS3Endpoint: Endpoint where Service == AWS.S3 {
