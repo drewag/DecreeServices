@@ -8,6 +8,9 @@
 import XCTest
 import Decree
 import DecreeServices
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 class GoogleAnalyticsTests: XCTestCase {
     let session = TestURLSession()
